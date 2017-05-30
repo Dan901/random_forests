@@ -13,7 +13,7 @@ public class LinearModelTerminalNode extends Node<Double> {
 	}
 
 	@Override
-	public Double predict(double[] features) {
+	public Double getTargetValue(double[] features) {
 		int n = parameters.length - 1;
 		if (n != features.length) {
 			throw new IllegalArgumentException("This node is built to estimate target value from:" + n + " features.");

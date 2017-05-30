@@ -14,7 +14,7 @@ import hr.fer.zemris.ml.model.decision_tree.ClassificationTerminalNode;
 import hr.fer.zemris.ml.model.decision_tree.LinearModelTerminalNode;
 import hr.fer.zemris.ml.model.decision_tree.Node;
 
-public class TerminalNodeFactory {
+public class TerminalNodeFactories {
 
 	public static final ITerminalNodeFactory<String> classificationNodeFactory = new ITerminalNodeFactory<String>() {
 		@Override

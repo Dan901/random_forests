@@ -28,7 +28,7 @@ public class RegressionRandomForest extends RandomForest<Double> implements Seri
 	@Override
 	public Double predict(double[] features) {
 		checkNumOfFeatures(Objects.requireNonNull(features));
-		return trees.stream().mapToDouble(tree -> tree.predict(features)).average().getAsDouble();
+		return trees.stream().mapToDouble(tree -> tree.getTargetValue(features)).average().getAsDouble();
 	}
 
 }

@@ -13,7 +13,7 @@ public class ClassificationTerminalNode extends Node<String> {
 	}
 
 	@Override
-	public String predict(double[] features) {
+	public String getTargetValue(double[] features) {
 		return target;
 	}
 

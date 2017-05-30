@@ -55,7 +55,7 @@ public class ClassificationRandomForest extends RandomForest<String> {
 
 	private Map<String, Long> calculateFrequencies(double[] features) {
 		checkNumOfFeatures(Objects.requireNonNull(features));
-		return trees.stream().map(tree -> tree.predict(features))
+		return trees.stream().map(tree -> tree.getTargetValue(features))
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 	}
 }

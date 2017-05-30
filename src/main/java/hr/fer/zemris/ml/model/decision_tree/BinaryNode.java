@@ -18,11 +18,11 @@ public class BinaryNode<T> extends Node<T> {
 	}
 
 	@Override
-	public T predict(double[] features) {
+	public T getTargetValue(double[] features) {
 		if (split.test(features)) {
-			return left.predict(features);
+			return left.getTargetValue(features);
 		} else {
-			return right.predict(features);
+			return right.getTargetValue(features);
 		}
 	}
 

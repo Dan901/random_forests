@@ -33,6 +33,6 @@ public class DecisionTree<T> implements IPredictor<T>, Serializable {
 
 	@Override
 	public T predict(double[] features) {
-		return root.predict(features);
+		return root.getTargetValue(features);
 	}
 }

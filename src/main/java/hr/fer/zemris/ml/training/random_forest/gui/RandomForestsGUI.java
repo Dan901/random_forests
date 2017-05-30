@@ -56,7 +56,7 @@ import hr.fer.zemris.ml.training.data.RegressionDataset;
 import hr.fer.zemris.ml.training.decision_tree.CARTGenerator;
 import hr.fer.zemris.ml.training.decision_tree.ITerminalNodeFactory;
 import hr.fer.zemris.ml.training.decision_tree.ITreeGenerator;
-import hr.fer.zemris.ml.training.decision_tree.TerminalNodeFactory;
+import hr.fer.zemris.ml.training.decision_tree.TerminalNodeFactories;
 import hr.fer.zemris.ml.training.decision_tree.split.AbstractSplitCriterion;
 import hr.fer.zemris.ml.training.decision_tree.split.EntropyReduction;
 import hr.fer.zemris.ml.training.decision_tree.split.GiniIndexReduction;
@@ -580,9 +580,9 @@ public class RandomForestsGUI extends JFrame {
 	private static final Map<String, ISplitCriterionFactory<String>> classificationSplits = new HashMap<>();
 	private static final Map<String, ISplitCriterionFactory<Double>> regressionSplits = new HashMap<>();
 	static {
-		classificationNodes.put("Classification node", TerminalNodeFactory.classificationNodeFactory);
-		regressionNodes.put("Linear model node", TerminalNodeFactory.linearModelNodeFactory);
-		regressionNodes.put("Average value node", TerminalNodeFactory.averageValueNodeFactory);
+		classificationNodes.put("Classification node", TerminalNodeFactories.classificationNodeFactory);
+		regressionNodes.put("Linear model node", TerminalNodeFactories.linearModelNodeFactory);
+		regressionNodes.put("Average value node", TerminalNodeFactories.averageValueNodeFactory);
 		classificationSplits.put("Gini index reduction", GiniIndexReduction::new);
 		classificationSplits.put("Entropy reduction", EntropyReduction::new);
 		regressionSplits.put("Standard deviation reduction", SDReduction::new);

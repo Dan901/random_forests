@@ -11,7 +11,7 @@ public class AverageValueTerminalNode extends Node<Double> {
 	}
 
 	@Override
-	public Double predict(double[] features) {
+	public Double getTargetValue(double[] features) {
 		return value;
 	}
 
