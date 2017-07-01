@@ -15,7 +15,7 @@ public abstract class AbstractClassificationSplitCriterion extends AbstractSplit
 	}
 
 	@Override
-	public double calculateValueToMinimize(Collection<List<Sample<String>>> groups) {
+	protected double calculateValueToMinimize(Collection<List<Sample<String>>> groups) {
 		double value = 0;
 		int n = 0;
 		for (List<Sample<String>> group : groups) {
@@ -35,7 +35,7 @@ public abstract class AbstractClassificationSplitCriterion extends AbstractSplit
 	}
 
 	@Override
-	public boolean dontSplit(List<Sample<String>> samples) {
+	protected boolean dontSplit(List<Sample<String>> samples) {
 		String firstClass = samples.get(0).getTarget();
 		return samples.stream().allMatch(s -> s.getTarget().equals(firstClass));
 	}

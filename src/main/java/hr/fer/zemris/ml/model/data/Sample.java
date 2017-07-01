@@ -4,6 +4,14 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
+/**
+ * Training sample for supervised learning methods. Contains a
+ * {@code double array} of features and a target value.
+ *
+ * @author Dan
+ * @param <T> Type of the target value, usually {@code String} for
+ *        classification and {@code Double} for function approximation tasks.
+ */
 public class Sample<T> {
 
 	private double[] features;
@@ -43,6 +51,7 @@ public class Sample<T> {
 		return result;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

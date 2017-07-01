@@ -15,6 +15,16 @@ import hr.fer.zemris.ml.training.Util;
 import hr.fer.zemris.ml.training.data.Dataset;
 import hr.fer.zemris.ml.training.decision_tree.ITreeGenerator;
 
+/**
+ * Abstract random forest generator.
+ * <p>
+ * Acts as a subject in Observer design pattern and observers can
+ * register/deregister with {@link #addObserver} and {@link #removeObserver}.
+ *
+ * @author Dan
+ * @param <T> Type of the target value, usually {@code String} for
+ *        classification and {@code Double} for function approximation tasks.
+ */
 public abstract class RFGenerator<T> {
 
 	protected List<IRFGeneratorObserver> observers;
@@ -22,7 +32,7 @@ public abstract class RFGenerator<T> {
 	private ITreeGenerator<T> treeGenerator;
 	private ExecutorService pool;
 
-	public RFGenerator(Dataset<T> dataset, ITreeGenerator<T> treeGenerator) {
+	protected RFGenerator(Dataset<T> dataset, ITreeGenerator<T> treeGenerator) {
 		this.dataset = Objects.requireNonNull(dataset);
 		this.treeGenerator = Objects.requireNonNull(treeGenerator);
 		observers = new CopyOnWriteArrayList<>();
@@ -36,6 +46,9 @@ public abstract class RFGenerator<T> {
 		observers.remove(observer);
 	}
 
+	/**
+	 * Stops the tree building process.
+	 */
 	public void stop() {
 		pool.shutdownNow();
 	}

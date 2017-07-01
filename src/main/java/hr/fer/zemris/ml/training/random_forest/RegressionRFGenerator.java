@@ -9,12 +9,35 @@ import hr.fer.zemris.ml.model.random_forest.RegressionRandomForest;
 import hr.fer.zemris.ml.training.data.RegressionDataset;
 import hr.fer.zemris.ml.training.decision_tree.ITreeGenerator;
 
+/**
+ * Regression random forest generator.
+ *
+ * @see RFGenerator
+ * @author Dan
+ */
 public class RegressionRFGenerator extends RFGenerator<Double> {
 
+	/**
+	 * Creates a new {@code RegressionRFGenerator}.
+	 * 
+	 * @param dataset training samples
+	 * @param treeGenerator generator of a single decision tree
+	 */
 	public RegressionRFGenerator(RegressionDataset dataset, ITreeGenerator<Double> treeGenerator) {
 		super(dataset, treeGenerator);
 	}
 
+	/**
+	 * Starts the forest building process. Each tree is generated with the
+	 * generator received in the constructor.
+	 * <p>
+	 * After every tree is generated,
+	 * {@link IRFGeneratorObserver#regressionTreeConstructed} method is called
+	 * on registered observers.
+	 * 
+	 * @param size number of trees to build
+	 * @return trained random forest model
+	 */
 	public RegressionRandomForest buildForest(int size) {
 		return new RegressionRandomForest(buildTrees(size), dataset.getNumOfFeatures());
 	}

@@ -12,6 +12,14 @@ import java.util.stream.Collectors;
 
 import hr.fer.zemris.ml.model.data.Sample;
 
+/**
+ * Abstract representation of a training dataset for supervised learning
+ * methods.
+ *
+ * @author Dan
+ * @param <T> Type of the target value, usually {@code String} for
+ *        classification and {@code Double} for function approximation tasks.
+ */
 public abstract class Dataset<T> {
 
 	private static final String COMMENT = "#";
@@ -24,6 +32,12 @@ public abstract class Dataset<T> {
 		samples = new ArrayList<>();
 	}
 
+	/**
+	 * Adds a single sample to the dataset.
+	 * 
+	 * @param sample sample to add, has to have the same number of features as
+	 *        previously added samples.
+	 */
 	public void addSample(Sample<T> sample) {
 		Objects.requireNonNull(sample, "Sample cannot be null.");
 		int n = sample.getNumOfFeatures();
@@ -56,6 +70,19 @@ public abstract class Dataset<T> {
 		this.variableNames = variableNames;
 	}
 
+	/**
+	 * Loads the samples from given file. Format of the file has to be
+	 * {@code CSV} with every row representing one sample, first containing
+	 * features and target value at the end of the row. All features have to be
+	 * {@code double} values.
+	 * 
+	 * @param csv path to the file
+	 * @param headerRow if {@code true} first row will be parsed as names of
+	 *        every variable and saved, not considered as one sample
+	 * @throws IOException id I/O error occurs
+	 * @throws NumberFormatException if some feature cannot be parsed as a real
+	 *         number
+	 */
 	public void loadFromCSV(Path csv, boolean headerRow) throws IOException, NumberFormatException {
 		List<String> lines = Files.readAllLines(csv);
 		for (String line : lines) {

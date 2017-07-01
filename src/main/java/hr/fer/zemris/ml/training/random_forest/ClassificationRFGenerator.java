@@ -10,15 +10,38 @@ import hr.fer.zemris.ml.model.random_forest.ClassificationRandomForest;
 import hr.fer.zemris.ml.training.data.ClassificationDataset;
 import hr.fer.zemris.ml.training.decision_tree.ITreeGenerator;
 
+/**
+ * Classification random forest generator.
+ *
+ * @see RFGenerator
+ * @author Dan
+ */
 public class ClassificationRFGenerator extends RFGenerator<String> {
 
 	private Set<String> classes;
 
+	/**
+	 * Creates a new {@code ClassificationRFGenerator}.
+	 * 
+	 * @param dataset training samples
+	 * @param treeGenerator generator of a single decision tree
+	 */
 	public ClassificationRFGenerator(ClassificationDataset dataset, ITreeGenerator<String> treeGenerator) {
 		super(dataset, treeGenerator);
 		classes = dataset.getAllClasses();
 	}
 
+	/**
+	 * Starts the forest building process. Each tree is generated with the
+	 * generator received in the constructor.
+	 * <p>
+	 * After every tree is generated,
+	 * {@link IRFGeneratorObserver#classificationTreeConstructed} method is
+	 * called on registered observers.
+	 * 
+	 * @param size number of trees to build
+	 * @return trained random forest model
+	 */
 	public ClassificationRandomForest buildForest(int size) {
 		return new ClassificationRandomForest(buildTrees(size), dataset.getNumOfFeatures(), new ArrayList<>(classes));
 	}

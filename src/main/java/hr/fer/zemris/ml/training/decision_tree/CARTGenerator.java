@@ -13,6 +13,17 @@ import hr.fer.zemris.ml.model.decision_tree.Node;
 import hr.fer.zemris.ml.training.Util;
 import hr.fer.zemris.ml.training.decision_tree.split.ISplitCriterion;
 
+/**
+ * Decision tree generator based on CART algorithm. Supports only features whose
+ * values are continuous ({@code double}).
+ * <p>
+ * User can specify which split evaluation criterion, which terminal node
+ * factory and which parameters will be used.
+ *
+ * @author Dan
+ * @param <T> Type of the target value, usually {@code String} for
+ *        classification and {@code Double} for function approximation tasks.
+ */
 public class CARTGenerator<T> implements ITreeGenerator<T> {
 
 	private ISplitCriterion<T> splitCriterion;
@@ -21,6 +32,17 @@ public class CARTGenerator<T> implements ITreeGenerator<T> {
 	private int numOfFeatures;
 	private int featuresToCheck;
 
+	/**
+	 * Creates a new {@code CARTGenerator} with given arguments.
+	 * 
+	 * @param splitCriterion criterion to evaluate the best possible split at
+	 *        the current node
+	 * @param factory terminal node factory
+	 * @param maxDepth max tree depth
+	 * @param numOfFeatures number of features all training samples have
+	 * @param featuresToCheck number of features to randomly choose at each node
+	 *        that will be considered for splitting the current samples
+	 */
 	public CARTGenerator(ISplitCriterion<T> splitCriterion, ITerminalNodeFactory<T> factory, int maxDepth,
 			int numOfFeatures, int featuresToCheck) {
 		if (maxDepth < 1) {

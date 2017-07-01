@@ -23,6 +23,13 @@ import hr.fer.zemris.ml.model.IPredictor;
 import hr.fer.zemris.ml.model.data.Sample;
 import hr.fer.zemris.ml.training.data.RegressionDataset;
 
+/**
+ * Plots the regression training samples if they have only 1 feature (single
+ * variable function) on a 2D graph. Also function approximation is plotted
+ * based on regressor trained on those samples.
+ *
+ * @author Dan
+ */
 public class RegressionPlot2D extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -62,26 +69,26 @@ public class RegressionPlot2D extends JFrame {
 		x.setRange(xmin, xmax);
 		y.setRange(ymin, ymax);
 		double xstep = (xmax - xmin) / (getWidth() - 60);
-		
+
 		XYPlot plot = new XYPlot();
 		plot.setDomainAxis(0, x);
 		plot.setRangeAxis(0, y);
 
 		Shape pointShape = new Ellipse2D.Double(0, 0, 5, 5);
 		Shape pointShape2 = new Rectangle(0, 0, 5, 5);
-		
+
 		XYSeries trainingSeries = generateTrainingSeries();
 		plot.setDataset(0, new XYSeriesCollection(trainingSeries));
 		XYLineAndShapeRenderer ren = new XYLineAndShapeRenderer(false, true);
 		ren.setSeriesShape(0, pointShape);
 		plot.setRenderer(0, ren);
-		
+
 		XYSeries series = generateSeries(xmin, xmax, xstep);
 		plot.setDataset(1, new XYSeriesCollection(series));
 		XYLineAndShapeRenderer ren2 = new XYLineAndShapeRenderer(true, false);
 		ren.setSeriesShape(1, pointShape2);
 		plot.setRenderer(1, ren2);
-		
+
 		JFreeChart chart = new JFreeChart(plot);
 		ChartPanel panel = new ChartPanel(chart, true);
 		setLayout(new BorderLayout());
@@ -95,7 +102,7 @@ public class RegressionPlot2D extends JFrame {
 		}
 		return series;
 	}
-	
+
 	private XYSeries generateSeries(double xmin, double xmax, double xstep) {
 		XYSeries series = new XYSeries("model");
 		double[] point = new double[1];

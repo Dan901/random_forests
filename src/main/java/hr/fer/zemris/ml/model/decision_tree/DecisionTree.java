@@ -7,10 +7,18 @@ import java.util.Objects;
 import hr.fer.zemris.ml.model.IPredictor;
 import hr.fer.zemris.ml.model.data.Sample;
 
+/**
+ * Encapsulates the root of the decision tree represented by {@link Node} object
+ * and training samples.
+ *
+ * @author Dan
+ * @param <T> Type of the target value, usually {@code String} for
+ *        classification and {@code Double} for function approximation tasks.
+ */
 public class DecisionTree<T> implements IPredictor<T>, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Node<T> root;
 	private List<Sample<T>> trainingSamples;
 

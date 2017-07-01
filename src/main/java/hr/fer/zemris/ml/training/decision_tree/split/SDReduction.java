@@ -6,18 +6,34 @@ import java.util.List;
 import hr.fer.zemris.ml.model.data.Sample;
 import hr.fer.zemris.ml.training.data.Dataset;
 
+/**
+ * Chooses the best split based on standard deviation reduction. Usable for
+ * regression tasks.
+ * <p>
+ * Splitting of samples stops when a predetermined percentage of training
+ * samples starting standard deviation is reached in current set of samples.
+ *
+ * @author Dan
+ */
 public class SDReduction extends AbstractSplitCriterion<Double> {
 
 	private static final double MIN_SD_PERCENT = 0.05;
 	private double minSD;
 
+	/**
+	 * Creates a new {@code SDReduction} criterion.
+	 * 
+	 * @param dataset training samples for initialization
+	 * @param minSamplesPerNode minimum number of training samples based on
+	 *        which a terminal node can be generated
+	 */
 	public SDReduction(Dataset<Double> dataset, int minSamplesPerNode) {
 		super(dataset, minSamplesPerNode);
 		minSD = calculateSD(dataset.getSamples()) * MIN_SD_PERCENT;
 	}
 
 	@Override
-	public double calculateValueToMinimize(Collection<List<Sample<Double>>> groups) {
+	protected double calculateValueToMinimize(Collection<List<Sample<Double>>> groups) {
 		int n = 0;
 		double sd = 0;
 		for (List<Sample<Double>> group : groups) {
@@ -29,7 +45,7 @@ public class SDReduction extends AbstractSplitCriterion<Double> {
 	}
 
 	@Override
-	public boolean dontSplit(List<Sample<Double>> samples) {
+	protected boolean dontSplit(List<Sample<Double>> samples) {
 		return calculateSD(samples) <= minSD;
 	}
 

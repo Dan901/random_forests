@@ -4,6 +4,15 @@ import java.util.Map;
 
 import hr.fer.zemris.ml.training.data.Dataset;
 
+/**
+ * Chooses the best split based on entropy reduction (i.e. maximizing
+ * information gain). Usable for classification tasks.
+ * <p>
+ * Splitting of samples stops when all the current samples belong to the same
+ * class.
+ *
+ * @author Dan
+ */
 public class EntropyReduction extends AbstractClassificationSplitCriterion {
 
 	public EntropyReduction(Dataset<String> dataset, int minSamplesPerNode) {

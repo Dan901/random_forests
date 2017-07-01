@@ -26,6 +26,13 @@ import hr.fer.zemris.ml.model.IPredictor;
 import hr.fer.zemris.ml.model.data.Sample;
 import hr.fer.zemris.ml.training.data.ClassificationDataset;
 
+/**
+ * Plots the classification training samples if they have only 2 features on a
+ * 2D graph. Also surrounding area is colored based of predictions from a
+ * classifier trained on those samples.
+ *
+ * @author Dan
+ */
 public class ClassificationPlot2D extends JFrame {
 
 	private static final long serialVersionUID = 1L;

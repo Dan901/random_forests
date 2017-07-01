@@ -10,6 +10,15 @@ import hr.fer.zemris.ml.model.data.Sample;
 import hr.fer.zemris.ml.model.decision_tree.SplitPredicate;
 import hr.fer.zemris.ml.training.data.Dataset;
 
+/**
+ * Abstract class for different split criteria. All criteria share the same code
+ * that evaluates something on every possible split and that functionality is
+ * extracted here.
+ *
+ * @author Dan
+ * @param <T> Type of the target value, usually {@code String} for
+ *        classification and {@code Double} for function approximation tasks.
+ */
 public abstract class AbstractSplitCriterion<T> implements ISplitCriterion<T> {
 
 	private int minSamplesPerNode;

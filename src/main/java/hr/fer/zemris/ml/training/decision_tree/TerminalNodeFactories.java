@@ -14,8 +14,17 @@ import hr.fer.zemris.ml.model.decision_tree.ClassificationTerminalNode;
 import hr.fer.zemris.ml.model.decision_tree.LinearModelTerminalNode;
 import hr.fer.zemris.ml.model.decision_tree.Node;
 
+/**
+ * Contains available implementations of {@link ITerminalNodeFactory} interface.
+ *
+ * @author Dan
+ */
 public class TerminalNodeFactories {
 
+	/**
+	 * Creates a {@link ClassificationTerminalNode} with class value being the
+	 * mode of all classes in given samples.
+	 */
 	public static final ITerminalNodeFactory<String> classificationNodeFactory = new ITerminalNodeFactory<String>() {
 		@Override
 		public Node<String> createTerminal(List<Sample<String>> samples) {
@@ -26,6 +35,10 @@ public class TerminalNodeFactories {
 		}
 	};
 
+	/**
+	 * Creates an {@link AverageValueTerminalNode} with target variable value
+	 * being the average value of all target values in given samples.
+	 */
 	public static final ITerminalNodeFactory<Double> averageValueNodeFactory = new ITerminalNodeFactory<Double>() {
 		@Override
 		public Node<Double> createTerminal(List<Sample<Double>> samples) {
@@ -34,6 +47,11 @@ public class TerminalNodeFactories {
 		}
 	};
 
+	/**
+	 * Creates a linear regression model from given samples and a
+	 * {@link LinearModelTerminalNode} with that model stored for future
+	 * predictions.
+	 */
 	public static final ITerminalNodeFactory<Double> linearModelNodeFactory = new ITerminalNodeFactory<Double>() {
 		@Override
 		public Node<Double> createTerminal(List<Sample<Double>> samples) {
